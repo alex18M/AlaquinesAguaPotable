@@ -1,5 +1,8 @@
 ﻿@page "/"
+@using AguaPotableAlaquines.Services
 @inject NavigationManager Navigation
+@inject AuthService Auth
+
 
 <div class="login-container">
     <div class="login-box">
@@ -25,14 +28,10 @@
 
     private async Task IniciarSesion()
     {
-        // Aquí iría la lógica de login con Firebase
-        if (Email == "admin@example.com" && Password == "1234")
-        {
+        var ok = await Auth.LoginAsync(Email, Password);
+        if (ok)
             Navigation.NavigateTo("/dashboard");
-        }
         else
-        {
             Mensaje = "Credenciales incorrectas";
-        }
     }
 }
