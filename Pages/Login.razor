@@ -1,0 +1,38 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<div class="login-container">
+    <div class="login-box">
+        <img src="img/logo.png" class="logo" />
+        <h2>Iniciar Sesión</h2>
+
+        <input @bind="Email" placeholder="Correo electrónico" class="input-field" />
+        <input @bind="Password" placeholder="Contraseña" type="password" class="input-field" />
+
+        <button @onclick="IniciarSesion" class="btn-login">Acceder</button>
+
+        @if (!string.IsNullOrEmpty(Mensaje))
+        {
+            <p class="error">@Mensaje</p>
+        }
+    </div>
+</div>
+
+@code {
+    private string Email = "";
+    private string Password = "";
+    private string Mensaje = "";
+
+    private async Task IniciarSesion()
+    {
+        // Aquí iría la lógica de login con Firebase
+        if (Email == "admin@example.com" && Password == "1234")
+        {
+            Navigation.NavigateTo("/dashboard");
+        }
+        else
+        {
+            Mensaje = "Credenciales incorrectas";
+        }
+    }
+}
